@@ -1,0 +1,8 @@
+{
+    "body": "{\"traveller_id\": 1231,\"name\": \"Nissin Lamen Spicy\",\"description\": \"Nissin Lamen Spicy Special Edition\",\"product_category_id\": 2,\"max_qty\": 10,\"min_price\": 5.51,\"max_price\": 5.21}",
+    "requestContext": {
+        "identity": {
+            "cognitoIdentityId": "USER-SUB-1234"
+        }
+    }
+}

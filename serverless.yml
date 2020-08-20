@@ -1,0 +1,95 @@
+# We are using JEST for testing: https://jestjs.io/docs/en/getting-started.html - npm test
+service: friendship-api
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+# Create our resources with separate CloudFormation templates
+resources:
+  # API Gateway Handler
+  - ${file(resources/api-gateway-handler.yml)}
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-sequelize-migrations # for sql migrations
+
+custom:
+  migrationsPath: "./resources/sql/" # migration folder
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  # stage: ${opt:stage, 'dev'}
+  region: us-east-1 # change this to pacific
+
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
+    DB_DIALECT: ${env:DB_DIALECT}
+    DB_NAME: ${env:DB_NAME}
+    DB_USERNAME: ${env:DB_USERNAME}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_HOST: ${env:DB_HOST}
+    DB_PORT: ${env:DB_PORT}
+
+  # 'iamRoleStatements' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
+  # iamRoleStatements:
+  #  - Effect: Allow
+  #    Action:
+  #      - dynamodb:DescribeTable
+  #      - dynamodb:Query
+  #      - dynamodb:Scan
+  #      - dynamodb:GetItem
+  #      - dynamodb:PutItem
+  #      - dynamodb:UpdateItem
+  #      - dynamodb:DeleteItem
+  #    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+functions:
+  # Preorder
+  preorder-list:
+    handler: functions/preorder/list.main
+    events:
+      - http:
+          path: preorder/list
+          method: get
+          cors: true
+          authorizer: aws_iam
+  preorder-create:
+    handler: functions/preorder/create.main
+    events:
+      - http:
+          path: preorder/create
+          method: post
+          cors: true
+          authorizer: aws_iam
+  preorder-update:
+    handler: functions/preorder/update.main
+    events:
+      - http:
+          path: preorder/update
+          method: post
+          cors: true
+          authorizer: aws_iam
+  preorder-read:
+    handler: functions/preorder/read.main
+    events:
+      - http:
+          path: preorder/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  # Product Category
+  product-category-list:
+    handler: functions/product-category/list.main
+    events:
+      - http:
+          path: product-category/list
+          method: get
+          cors: true
+          authorizer: aws_iam

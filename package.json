@@ -1,0 +1,33 @@
+{
+  "name": "friedship-api",
+  "version": "1.0.0",
+  "description": "FriendShip marketplace for the Serverless Framework",
+  "main": "handler.js",
+  "scripts": {
+    "test": "serverless-bundle test",
+    "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline -s prod"
+  },
+  "author": "Bonetti, Mauricio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.736.0",
+    "eslint": "^7.7.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^26.4.0",
+    "serverless-bundle": "^3.0.0",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-offline": "^6.5.0"
+  },
+  "dependencies": {
+    "pg-native": "^3.0.0",
+    "postgresql-easy": "^1.2.5",
+    "serverless": "^1.79.0",
+    "serverless-sequelize-migrations": "^1.1.0",
+    "stripe": "^8.88.0",
+    "uuid": "^8.3.0"
+  }
+}
