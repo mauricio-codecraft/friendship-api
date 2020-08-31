@@ -27,6 +27,7 @@
     "postgresql-easy": "^1.2.5",
     "serverless": "^1.79.0",
     "serverless-sequelize-migrations": "^1.1.0",
+    "sinon": "^9.0.3",
     "stripe": "^8.88.0",
     "uuid": "^8.3.0"
   }

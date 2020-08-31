@@ -10,7 +10,8 @@ Uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bu
 - **Run API Gateway locally**
   - Use `serverless offline start`
 - **Support for unit tests**
-  - Run `npm test` to run your tests
+  - Run `npm test` to run your tests. Jest is the testing framework adopted
+  [Reference for mocking with Sinon](https://semaphoreci.com/community/tutorials/best-practices-for-spies-stubs-and-mocks-in-sinon-js)
 - **Sourcemaps for proper error messages**
   - Error message show the correct line numbers
   - Works in production with CloudWatch
